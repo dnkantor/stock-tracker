@@ -7,4 +7,6 @@ Rails.application.routes.draw do
 
   get 'search_stock', to: 'stocks#search'
 
+  resources :user_stocks, only: [:create]
+
 end
