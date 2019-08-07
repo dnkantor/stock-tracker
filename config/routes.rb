@@ -10,6 +10,10 @@ Rails.application.routes.draw do
 
   resources :user_stocks, only: [:create, :destroy]
 
+  resources :users, only: [:show]
+
+  resources :friendships
+  
   get 'friends', to: 'users#friends'
 
 end
