@@ -13,7 +13,11 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
 
   resources :friendships
-  
+
   get 'friends', to: 'users#friends'
+
+  post 'add_friend', to: 'users#add_friend'
+
+  get 'search_friend', to: 'users#search'
 
 end
