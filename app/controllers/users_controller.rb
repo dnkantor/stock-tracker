@@ -21,10 +21,15 @@ class UsersController < ApplicationController
         end
     end
     
-    # def add_friend
-    #     @user = params[:user]
-    #     @friend = params[:friend]
-    #     @user.friends << @friend
-    #     redirect_to friends_path
-    # end
+    def add_friend
+        @friend = User.find(params[:friend])
+        current_user.friendships.build(friend_id: @friend.id)
+
+        if current_user.save
+            flash[:success] = "You have added #{@friend.get_full_name} as a friend."
+        else
+            flash[:danger] = "Something went wrong."
+        end
+        redirect_to friends_path
+    end
 end

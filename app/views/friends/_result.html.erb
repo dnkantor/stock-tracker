@@ -3,7 +3,7 @@
         <%= bootstrap_flash %>
     </div>
 <% end %>
-<% if @users %>
+<% if @users and @users.size > 0 %>
     <div class="well results-block col-md-8" id="friend-lookup-results">
         <table class="search-results-table col-md-12">
             <tbody>
@@ -12,7 +12,11 @@
                         <td><strong>Name: </strong><%= user.get_full_name %></td>
                         <td><strong>Email: </strong><%= user.email %></td>
                         <td><%= link_to  "View Profile", "#", class: "btn btn-xs btn-primary" %>
+                        <% if current_user.not_friends_with?(user.id) %>
                             <%= link_to  "Add as a friend", add_friend_path(user: current_user, friend: user), class: "btn btn-xs btn-primary", method: :post %>
+                        <% else %>
+                            <span class="label label-primary">You are already friends. </span>
+                        <% end %>
                         </td>
                     </tr>
                 <% end %>
